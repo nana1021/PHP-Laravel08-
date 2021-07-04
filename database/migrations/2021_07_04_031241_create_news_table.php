@@ -4,21 +4,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfileTable extends Migration
+class CreateNewsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
+    
     public function up()
     {
-        Schema::create('profile', function (Blueprint $table) {
+        Schema::create('news', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('gender');
-            $table->string('hobby');
-            $table->string('introduction');
+            $table->string('title'); // ニュースのタイトルを保存するカラム
+            $table->string('body');  // ニュースの本文を保存するカラム
             $table->string('image_path')->nullable();  // 画像のパスを保存するカラム
             $table->timestamps();
         });
@@ -31,6 +30,7 @@ class CreateProfileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile');
+        Schema::dropIfExists('news');
     }
+   
 }
