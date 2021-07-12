@@ -38,3 +38,4 @@ Route::get('profile/delete', 'Admin\ProfileController@delete')->middleware('auth
 Auth::routes();
 
 Route::get('/home', 'HomeController@index') -> name('home');
+Route::get('/', 'NewsController@index');
