@@ -4,16 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class History extends Model
+class Record extends Model
 {
     protected $guarded = array('id');
 
     public static $rules = array(
-        'news_id' => 'required',
+        'profile_id' => 'required',
         'edited_at' => 'required',
     );
-    public function histories()
+     public function records()
     {
-        return $fhis->hasMany('App/History');
+      return $this->hasMany('App\Record');
     }
 }

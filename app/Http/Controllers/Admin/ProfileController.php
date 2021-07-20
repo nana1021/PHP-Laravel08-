@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Profile;
+use App\Record;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
     
     public function add()
     {
-        return view('admin.profile.create');
+       return view('admin.profile.create');
     }
 
     public function create(Request $request)
@@ -19,21 +21,13 @@ class ProfileController extends Controller
         $this->validate($request, Profile::$rules);
         $profile = new Profile;
         $form = $request->all();
-      
-      if (isset($form['image'])) {
-        $path = $request->file('image')->store('public/image');
-        $profile->image_path = basename($path);
-      } else {
-          $profile->image_path = null;
-      }
-      
+
       unset($form['_token']);
-      unset($form['image']);
       
       $profile->fill($form);
       $profile->save();
       
-        return redirect('admin/profile/create');
+      return redirect('admin/profile/create');
     }
     
      public function index(Request $request)
@@ -45,10 +39,12 @@ class ProfileController extends Controller
       } else {
           // それ以外はすべてのニュースを取得する
           $posts = Profile::all();
+          
+          return view('admin.profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
       }
-      return view('admin.profile.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+      
   }
-
+  
     public function edit(Request $request)
     {
         $profile = Profile::find($request->id);
@@ -70,6 +66,14 @@ class ProfileController extends Controller
       unset($profile_form['_token']);
       // 該当するデータを上書きして保存する
       $profile->fill($profile_form)->save();
-        return redirect('admin/profile/edit?id='.($request->id));
+   
+      return redirect('admin/profile/edit?id='.($request->id));
+      
+      $record = new Record;
+      $record->profile_id = $profile->id;
+      $record->edited_at = Carbon::now();
+      $record->save();
+      
+      return redirect('/profile');
     }
 }
