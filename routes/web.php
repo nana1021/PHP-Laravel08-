@@ -16,12 +16,12 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-    Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
-    Route::post('news/create', 'Admin\NewsController@create')->middleware('auth');
-    Route::get('news', 'Admin\NewsController@index')->middleware('auth');
-    Route::get('news/edit', 'Admin\NewsController@edit')->middleware('auth');
-    Route::post('news/edit', 'Admin\NewsController@update')->middleware('auth');
-    Route::get('news/delete', 'Admin\NewsController@delete')->middleware('auth');
+Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
+Route::post('news/create', 'Admin\NewsController@create')->middleware('auth');
+Route::get('news', 'Admin\NewsController@index')->middleware('auth');
+Route::get('news/edit', 'Admin\NewsController@edit')->middleware('auth');
+Route::post('news/edit', 'Admin\NewsController@update')->middleware('auth');
+Route::get('news/delete', 'Admin\NewsController@delete')->middleware('auth');
 });
 
 
@@ -39,4 +39,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index') -> name('home');
 Route::get('/', 'NewsController@index');
-Route::get('/profile', 'ProfileController@index');
+Route::get('/profiles', 'ProfileController@index');

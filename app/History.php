@@ -12,8 +12,4 @@ class History extends Model
         'news_id' => 'required',
         'edited_at' => 'required',
     );
-    public function histories()
-    {
-        return $fhis->hasMany('App/History');
-    }
 }

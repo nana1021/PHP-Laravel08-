@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\HTML;
 use App\Profile;
 
-class Profilecontroller extends Controller
+class ProfileController extends Controller
 {
     public function index(Request $request)
     {
@@ -17,6 +17,9 @@ class Profilecontroller extends Controller
         } else {
             $headline = null;
         }
+        
+        // profile/index.blade.php ファイルを渡している
+        // また View テンプレートに headline、 posts、という変数を渡している
         return view('profile.index', ['headline' => $headline, 'posts' => $posts]);
     }
 }
